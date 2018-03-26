@@ -8,6 +8,7 @@
     android:background="@drawable/bakcgroundrotate">
 
     <ListView
+        android:id="@+id/listView"
         android:layout_width="308dp"
         android:layout_height="395dp"
         android:layout_marginLeft="8dp"
