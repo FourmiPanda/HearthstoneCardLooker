@@ -4,9 +4,13 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.ArrayMap;
+import android.view.MotionEvent;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -21,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
 
     private TextView mTextView;
     final private String API_KEY = "EPttWHOnQvmshK6kJFXQzaYxrc5zp1hA0CKjsng5m2HWchg9L6";
+    private boolean isSpinnerTouched = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,44 +63,34 @@ public class MainActivity extends AppCompatActivity {
         adapter3.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         s3.setAdapter(adapter3);
 
-
-
-
-
-
-        RequestQueue queue = Volley.newRequestQueue(this);
-        String url ="https://omgvamp-hearthstone-v1.p.mashape.com/cards?attack=10";
-
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
-                new Response.Listener<String>() {
-
-                    public Map<String, String> getHeaders() {
-                        Map<String, String> mHeaders = new ArrayMap<String, String>();
-                        mHeaders.put("X-Mashape-Key", API_KEY);
-                        return mHeaders;
-                    }
-                    @Override
-                    public void onResponse(String response) {
-
-                        mTextView.setText("Response is: "+ response);
-                    }
-                }, new Response.ErrorListener() {
+        s1.setOnTouchListener(new View.OnTouchListener() {
             @Override
-            public void onErrorResponse(VolleyError error) {
-                mTextView.setText("That didn't work!"+error);
+            public boolean onTouch(View v, MotionEvent event) {
+                isSpinnerTouched = true;
+                return false;
             }
-
         });
 
 
-        queue.add(stringRequest);
+        s1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                if (!isSpinnerTouched){
+                    Intent intent = new Intent(getApplicationContext(),Main2Activity.class);
+                    intent.putExtra("Search",adapterView.getItemAtPosition(i).toString());
+                    startActivity(intent);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+                Toast.makeText(getApplicationContext(),"Click nothing",Toast.LENGTH_SHORT).show();
+            }
+        });
 
 
 
-    }
-
-    private void launchSearchActivity(){
-        Intent i = new Intent(this,Main2Activity.class);
     }
 
 
