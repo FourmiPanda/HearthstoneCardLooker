@@ -38,21 +38,21 @@ public class MainActivity extends AppCompatActivity {
                 "All","Druid", "Warlock", "Mage", "Warrior", "Hunter","Paladin","Priest","Shaman","Rogue"
         };
         Spinner s1 = (Spinner) findViewById(R.id.spinner1);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_spinner_item, arraySpinner1);
 
         String[] arraySpinner2 = new String[] {
                 "All","Weapon", "Spell", "Minion", "Else"
         };
         Spinner s2 = (Spinner) findViewById(R.id.spinner2);
-        ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(this,
+        ArrayAdapter<String> adapter2 = new ArrayAdapter<>(this,
                 android.R.layout.simple_spinner_item, arraySpinner2);
 
         String[] arraySpinner3 = new String[] {
                 "All","Allaince", "Horde", "Else"
         };
         Spinner s3 = (Spinner) findViewById(R.id.spinner3);
-        ArrayAdapter<String> adapter3 = new ArrayAdapter<String>(this,
+        ArrayAdapter<String> adapter3 = new ArrayAdapter<>(this,
                 android.R.layout.simple_spinner_item, arraySpinner3);
 
 
@@ -76,7 +76,9 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+
                 if (!isSpinnerTouched){
+                    Toast.makeText(getApplicationContext(),"Clic",Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(getApplicationContext(),Main2Activity.class);
                     intent.putExtra("Search",adapterView.getItemAtPosition(i).toString());
                     startActivity(intent);
