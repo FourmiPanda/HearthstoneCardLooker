@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.iut.e168076r.hearthstonecardlooker.Main2Activity"
-    android:background="@color/colorWhite">
+    android:background="@color/colorWhite"
+    tools:context="com.iut.e168076r.hearthstonecardlooker.Main2Activity">
 
     <TextView
         android:id="@+id/textViewMain2"
@@ -20,6 +20,9 @@
     <ListView
         android:layout_width="368dp"
         android:layout_height="482dp"
-        tools:layout_editor_absoluteX="8dp"
-        tools:layout_editor_absoluteY="77dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewMain2" />
 </android.support.constraint.ConstraintLayout>
