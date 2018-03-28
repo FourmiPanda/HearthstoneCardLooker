@@ -30,14 +30,12 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
 
     public TextView mTextView;
     public Spinner spinner,spinner2,spinner3,spinner4,spinner5;
-    public String API_KEY = "isSmSHyKTNmshHothfm1x9A6s5UBp1dEkHEjsnS5LcJRbmaxwh";
     public boolean spinnerCheck,spinnerCheck2,spinnerCheck3,spinnerCheck4,spinnerCheck5,spinnerCheck6 = false;
 
     @Override
@@ -309,7 +307,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
                 Map<String, String>  params = new HashMap<String, String>();
-                params.put("X-Mashape-Key", API_KEY);
+                params.put("X-Mashape-Key", Configuration.API_KEY);
                 params.put("Accept", "application/json");
 
                 return params;
