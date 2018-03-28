@@ -1,8 +1,11 @@
 package com.iut.e168076r.hearthstonecardlooker;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
@@ -44,6 +47,17 @@ public class Main2Activity extends AppCompatActivity {
 
         t = findViewById(R.id.textViewMain2);
         l = findViewById(R.id.listView);
+
+        l.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                HashMap<String,String> h = (HashMap<String,String>) adapterView.getItemAtPosition(i);
+                Intent intent = new Intent(getApplicationContext(),Main3Activity.class);
+                intent.putExtra("cardId",h.get("cardId"));
+                startActivity(intent);
+            }
+        });
+
         getHearthstoneSearch();
 
 
