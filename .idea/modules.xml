@@ -2,10 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://C:\Users\Kamel\AndroidStudioProjects\HearthstoneCardLooker\HCL.iml" filepath="C:\Users\Kamel\AndroidStudioProjects\HearthstoneCardLooker\HCL.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/HearthstoneCardLooker.iml" filepath="$PROJECT_DIR$/.idea/HearthstoneCardLooker.iml" />
-      <module fileurl="file://C:\Users\Kamel\AndroidStudioProjects\HearthstoneCardLooker\HearthstoneCardLooker2.iml" filepath="C:\Users\Kamel\AndroidStudioProjects\HearthstoneCardLooker\HearthstoneCardLooker2.iml" />
-      <module fileurl="file://C:\Users\Kamel\AndroidStudioProjects\HearthstoneCardLooker\.idea\HearthstoneCardLookerGITHUB.iml" filepath="C:\Users\Kamel\AndroidStudioProjects\HearthstoneCardLooker\.idea\HearthstoneCardLookerGITHUB.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>

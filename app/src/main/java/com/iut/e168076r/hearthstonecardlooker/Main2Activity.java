@@ -3,6 +3,11 @@ package com.iut.e168076r.hearthstonecardlooker;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.ArrayAdapter;
+import android.widget.ListAdapter;
+import android.widget.ListView;
+import android.widget.SimpleAdapter;
+import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,30 +24,63 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class Main2Activity extends AppCompatActivity {
+
+    private String search,type;
+    private TextView t;
+    private ListView l;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
 
-        String search = getIntent().getExtras().getString("Search");
-        String type = getIntent().getExtras().getString("Type");
+        search = getIntent().getExtras().getString("Search");
+        type = getIntent().getExtras().getString("Type");
 
-        TextView t = findViewById(R.id.textViewMain2);
-        t.setText(search+" - "+type);
-
+        t = findViewById(R.id.textViewMain2);
+        l = findViewById(R.id.listView);
+        getHearthstoneSearch();
 
 
     }
 
 
-    public void getHearthstoneInfo() {
+    public void getHearthstoneSearch() {
         RequestQueue queue = Volley.newRequestQueue(this);
-        String url = "https://omgvamp-hearthstone-v1.p.mashape.com/info";
+        String url = "";
+        switch(type){
+            case "Classes":
+                url = "https://omgvamp-hearthstone-v1.p.mashape.com/cards/classes/"+search;
+                break;
+            case "Sets":
+                url = "https://omgvamp-hearthstone-v1.p.mashape.com/cards/sets/"+search;
+                break;
+            case "Types":
+                url = "https://omgvamp-hearthstone-v1.p.mashape.com/cards/types/"+search;
+                break;
+            case "Factions":
+                url = "https://omgvamp-hearthstone-v1.p.mashape.com/cards/factions/"+search;
+                break;
+            case "Qualities":
+                url = "https://omgvamp-hearthstone-v1.p.mashape.com/cards/qualities/"+search;
+                break;
+            case "Races":
+                url = "https://omgvamp-hearthstone-v1.p.mashape.com/cards/races/"+search;
+                break;
+            default:
+                break;
+        }
+
         StringRequest postRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>()
                 {
@@ -50,7 +88,32 @@ public class Main2Activity extends AppCompatActivity {
                     public void onResponse(String response) {
                         Log.d("Response", response);
 
+                        JSONArray json_hearthstoneSearch = null;
+                        try {
+                            json_hearthstoneSearch = new JSONArray(response);
+                            String cardid = "";
+                            String cardname = "";
+                            HashMap<String,String> map = new HashMap<String,String>();
+                            ArrayList<HashMap<String,String>> list = new ArrayList<HashMap<String,String>>();;
 
+                            for(int i = 0; i < json_hearthstoneSearch.length(); i++){
+                                map = new HashMap<String,String>();
+
+                                cardid = json_hearthstoneSearch.getJSONObject(i).getString("cardId");
+                                cardname = json_hearthstoneSearch.getJSONObject(i).getString("name");
+                                map.put("cardId",cardid);
+                                map.put("name",cardname);
+                                list.add(map);
+                            }
+                            t.setText(list.toString());
+                            SimpleAdapter s = new SimpleAdapter(getApplicationContext(),list,R.layout.listview_layout,
+                                    new String[] { "cardId","name" },
+                                    new int[] {R.id.line_a, R.id.line_b} );
+                            l.setAdapter(s);
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
 
                     }
                 },
