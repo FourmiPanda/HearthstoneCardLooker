@@ -27,6 +27,8 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONArray;
 import org.json.JSONException;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -34,6 +36,7 @@ import java.util.Map;
 public class Main2Activity extends AppCompatActivity {
 
     private String search,type;
+    private String lang;
     private TextView t;
     private ListView l;
 
@@ -44,6 +47,7 @@ public class Main2Activity extends AppCompatActivity {
 
         search = getIntent().getExtras().getString("Search");
         type = getIntent().getExtras().getString("Type");
+        lang = getIntent().getExtras().getString("Lang");
 
 
         l = findViewById(R.id.listView);
@@ -69,27 +73,59 @@ public class Main2Activity extends AppCompatActivity {
         String url = "";
         switch(type){
             case "Classes":
-                url = "https://omgvamp-hearthstone-v1.p.mashape.com/cards/classes/"+search;
+                try {
+                    String query = URLEncoder.encode(search, "utf-8").replace("+", "%20");
+                    url = "https://omgvamp-hearthstone-v1.p.mashape.com/cards/classes/"+query;
+                } catch (UnsupportedEncodingException e) {
+                    e.printStackTrace();
+                }
+
                 break;
             case "Sets":
-                url = "https://omgvamp-hearthstone-v1.p.mashape.com/cards/sets/"+search;
+                try {
+                    String query = URLEncoder.encode(search, "utf-8").replace("+", "%20");
+                    url = "https://omgvamp-hearthstone-v1.p.mashape.com/cards/sets/"+query;
+                } catch (UnsupportedEncodingException e) {
+                    e.printStackTrace();
+                }
                 break;
             case "Types":
-                url = "https://omgvamp-hearthstone-v1.p.mashape.com/cards/types/"+search;
+                try {
+                    String query = URLEncoder.encode(search, "utf-8").replace("+", "%20");
+                    url = "https://omgvamp-hearthstone-v1.p.mashape.com/cards/types/"+query;
+                } catch (UnsupportedEncodingException e) {
+                    e.printStackTrace();
+                }
                 break;
             case "Factions":
-                url = "https://omgvamp-hearthstone-v1.p.mashape.com/cards/factions/"+search;
+                try {
+                    String query = URLEncoder.encode(search, "utf-8").replace("+", "%20");
+                    url = "https://omgvamp-hearthstone-v1.p.mashape.com/cards/factions/"+query;
+                } catch (UnsupportedEncodingException e) {
+                    e.printStackTrace();
+                }
                 break;
             case "Qualities":
-                url = "https://omgvamp-hearthstone-v1.p.mashape.com/cards/qualities/"+search;
+                try {
+                    String query = URLEncoder.encode(search, "utf-8").replace("+", "%20");
+                    url = "https://omgvamp-hearthstone-v1.p.mashape.com/cards/qualities/"+query;
+                } catch (UnsupportedEncodingException e) {
+                    e.printStackTrace();
+                }
                 break;
             case "Races":
-                url = "https://omgvamp-hearthstone-v1.p.mashape.com/cards/races/"+search;
+                try {
+                    String query = URLEncoder.encode(search, "utf-8").replace("+", "%20");
+                    url = "https://omgvamp-hearthstone-v1.p.mashape.com/cards/races/"+query;
+                } catch (UnsupportedEncodingException e) {
+                    e.printStackTrace();
+                }
                 break;
             default:
                 break;
         }
-
+        Log.d(">>DEBUG<<",url);
+        url += "?locale="+lang;
         StringRequest postRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>()
                 {

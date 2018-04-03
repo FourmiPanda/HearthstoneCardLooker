@@ -11,14 +11,14 @@
         android:id="@+id/textViewMain"
         android:layout_width="370dp"
         android:layout_height="115dp"
-        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="Bienvenue sur Hearthstone Card Looker"
         android:textAlignment="center"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:textSize="25dp"
-        android:textColor="@color/colorWhite" />
+        android:textColor="@color/colorWhite"
+        tools:layout_editor_absoluteX="0dp" />
 
     <Spinner
         android:id="@+id/spinner"
@@ -28,7 +28,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:textColor="@color/colorWhite"/>
+        android:textColor="@color/colorWhite"
+        tools:layout_editor_absoluteX="8dp" />
 
     <Spinner
         android:id="@+id/spinner2"
@@ -38,7 +39,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/spinner"
-        android:textColor="@color/colorWhite"/>
+        android:textColor="@color/colorWhite"
+        tools:layout_editor_absoluteX="8dp" />
 
     <Spinner
         android:id="@+id/spinner3"
@@ -48,7 +50,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/spinner2"
-        android:textColor="@color/colorWhite"/>
+        android:textColor="@color/colorWhite"
+        tools:layout_editor_absoluteX="8dp" />
 
     <Spinner
         android:id="@+id/spinner4"
@@ -58,7 +61,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/spinner3"
-        android:textColor="@color/colorWhite"/>
+        android:textColor="@color/colorWhite"
+        tools:layout_editor_absoluteX="8dp" />
 
     <Spinner
         android:id="@+id/spinner5"
@@ -68,7 +72,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/spinner4"
-        android:textColor="@color/colorWhite"/>
+        android:textColor="@color/colorWhite"
+        tools:layout_editor_absoluteX="8dp" />
 
     <Spinner
         android:id="@+id/spinner6"
@@ -78,5 +83,16 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/spinner5"
-        android:textColor="@color/colorWhite"/>
+        android:textColor="@color/colorWhite"
+        tools:layout_editor_absoluteX="8dp" />
+
+    <Spinner
+        android:id="@+id/spinnerLang"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginRight="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
+
 </android.support.constraint.ConstraintLayout>

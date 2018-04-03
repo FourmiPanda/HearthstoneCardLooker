@@ -33,8 +33,9 @@ import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
 
-    public Spinner spinner,spinner2,spinner3,spinner4,spinner5;
-    public boolean spinnerCheck,spinnerCheck2,spinnerCheck3,spinnerCheck4,spinnerCheck5,spinnerCheck6 = false;
+    public Spinner spinner,spinner2,spinner3,spinner4,spinner5,spinnerLang;
+    public boolean spinnerCheck,spinnerCheck2,spinnerCheck3,spinnerCheck4,spinnerCheck5,spinnerCheck6,spinnerCheckLang = false;
+    public String language = "enUS";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +47,13 @@ public class MainActivity extends AppCompatActivity {
         spinner3 = findViewById(R.id.spinner3);
         spinner4 = findViewById(R.id.spinner4);
         spinner5 = findViewById(R.id.spinner5);
+        spinnerLang = findViewById(R.id.spinnerLang);
 
+        if(getIntent().getExtras() != null ){
+            if(getIntent().getExtras().containsKey("locales")) {
+                language = getIntent().getExtras().getString("locales");
+            }
+        }
 
 
         getHearthstoneInfo();
@@ -60,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void getHearthstoneInfo() {
         RequestQueue queue = Volley.newRequestQueue(this);
-        String url = "https://omgvamp-hearthstone-v1.p.mashape.com/info";
+        String url = "https://omgvamp-hearthstone-v1.p.mashape.com/info?locale="+language;
         StringRequest postRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>()
                 {
@@ -78,6 +85,7 @@ public class MainActivity extends AppCompatActivity {
                             JSONArray arrFactions = json_hearthstoneInfo.getJSONArray("factions");
                             JSONArray arrQualities = json_hearthstoneInfo.getJSONArray("qualities");
                             JSONArray arrRaces = json_hearthstoneInfo.getJSONArray("races");
+                            JSONArray arrLocales = json_hearthstoneInfo.getJSONArray("locales");
 
                             //SPINNER CLASSES
                             ArrayList<String> list = new ArrayList<String>();
@@ -99,6 +107,7 @@ public class MainActivity extends AppCompatActivity {
                                     Intent intent = new Intent(getApplicationContext(),Main2Activity.class);
                                     intent.putExtra("Type","Classes");
                                     intent.putExtra("Search",adapterView.getItemAtPosition(i).toString());
+                                    intent.putExtra("Lang",language);
                                     startActivity(intent);
                                     }
                                     spinnerCheck = true;
@@ -109,6 +118,8 @@ public class MainActivity extends AppCompatActivity {
 
                                 }
                             });
+
+
 
                             //SPINNER SETS
                             list = new ArrayList<String>();
@@ -130,6 +141,7 @@ public class MainActivity extends AppCompatActivity {
                                     Intent intent = new Intent(getApplicationContext(),Main2Activity.class);
                                     intent.putExtra("Type","Sets");
                                     intent.putExtra("Search",adapterView.getItemAtPosition(i).toString());
+                                    intent.putExtra("Lang",language);
                                     startActivity(intent);
                                     }
                                     spinnerCheck2 = true;
@@ -161,6 +173,7 @@ public class MainActivity extends AppCompatActivity {
                                     Intent intent = new Intent(getApplicationContext(),Main2Activity.class);
                                     intent.putExtra("Type","Types");
                                     intent.putExtra("Search",adapterView.getItemAtPosition(i).toString());
+                                    intent.putExtra("Lang",language);
                                     startActivity(intent);
                                     }
                                     spinnerCheck3 = true;
@@ -192,6 +205,7 @@ public class MainActivity extends AppCompatActivity {
                                     Intent intent = new Intent(getApplicationContext(),Main2Activity.class);
                                     intent.putExtra("Type","Factions");
                                     intent.putExtra("Search",adapterView.getItemAtPosition(i).toString());
+                                    intent.putExtra("Lang",language);
                                     startActivity(intent);
                                     }
                                     spinnerCheck4 = true;
@@ -223,9 +237,40 @@ public class MainActivity extends AppCompatActivity {
                                     Intent intent = new Intent(getApplicationContext(),Main2Activity.class);
                                     intent.putExtra("Type","Qualities");
                                     intent.putExtra("Search",adapterView.getItemAtPosition(i).toString());
+                                    intent.putExtra("Lang",language);
                                     startActivity(intent);
                                     }
                                     spinnerCheck5 = true;
+                                }
+
+                                @Override
+                                public void onNothingSelected(AdapterView<?> adapterView) {
+
+                                }
+                            });
+
+                            //SPINNER LANG
+                            list = new ArrayList<String>();
+                            for(int i = 0; i < arrLocales.length(); i++){
+                                list.add(arrLocales.get(i).toString());
+                            }
+
+                            s = (Spinner) findViewById(R.id.spinnerLang);
+                            adapter = new ArrayAdapter<String>(getApplicationContext(),
+                                    android.R.layout.simple_spinner_item, list);
+                            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                            s.setAdapter(adapter);
+
+                            s.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                                @Override
+                                public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                                    if(spinnerCheckLang){
+                                        Toast.makeText(getApplicationContext(),"Clic",Toast.LENGTH_SHORT).show();
+                                        Intent intent = new Intent(getApplicationContext(),MainActivity.class);
+                                        intent.putExtra("locales",adapterView.getItemAtPosition(i).toString());
+                                        startActivity(intent);
+                                    }
+                                    spinnerCheckLang = true;
                                 }
 
                                 @Override
@@ -255,6 +300,7 @@ public class MainActivity extends AppCompatActivity {
                                     Intent intent = new Intent(getApplicationContext(),Main2Activity.class);
                                     intent.putExtra("Type","Races");
                                     intent.putExtra("Search",adapterView.getItemAtPosition(i).toString());
+                                    intent.putExtra("Lang",language);
                                     startActivity(intent);
                                     }
                                     spinnerCheck6 = true;
