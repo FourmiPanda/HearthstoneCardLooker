@@ -24,6 +24,8 @@ import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.target.GlideDrawableImageViewTarget;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
@@ -41,6 +43,7 @@ public class Main3Activity extends AppCompatActivity {
     public String lang = "enUS";
     public boolean spinnerCheckLang = false;
     public String cardid = "";
+    public GlideDrawableImageViewTarget imageViewTarget;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +57,8 @@ public class Main3Activity extends AppCompatActivity {
         textViewFaction = findViewById(R.id.textViewFaction);
         cardImg = findViewById(R.id.imageView);
         cardImgGold = findViewById(R.id.imageView2);
+
+        imageViewTarget = new GlideDrawableImageViewTarget(cardImgGold);
 
         if ( getIntent().getExtras() != null){
             if ( getIntent().getExtras().containsKey("Lang")){
@@ -113,6 +118,7 @@ public class Main3Activity extends AppCompatActivity {
                                             Intent intent = new Intent(getApplicationContext(),Main3Activity.class);
                                             intent.putExtra("Lang",adapterView.getItemAtPosition(i).toString());
                                             intent.putExtra("cardId",cardid);
+                                            finish();
                                             startActivity(intent);
                                         }
                                         spinnerCheckLang = true;
@@ -255,7 +261,8 @@ public class Main3Activity extends AppCompatActivity {
                                 textViewFaction.setText(faction);
 
                                 Picasso.with(getApplicationContext()).load(imageUrl).into(cardImg);
-                                Picasso.with(getApplicationContext()).load(imageUrlGold).into(cardImgGold);
+
+                                Glide.with(getApplicationContext()).load(imageUrlGold).into(imageViewTarget);
 
                                 Toast.makeText(getApplicationContext(), "Fin traitement", Toast.LENGTH_SHORT).show();
 
