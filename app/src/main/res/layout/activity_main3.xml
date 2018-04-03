@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorWhite"
+    android:background="@drawable/fond2hs"
     tools:context="com.iut.e168076r.hearthstonecardlooker.Main3Activity">
 
     <ImageView
@@ -26,7 +26,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.8"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView"
+        android:textColor="@color/colorWhite"/>
 
     <TextView
         android:id="@+id/textViewAHC"
@@ -38,7 +39,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.813"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewName" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewName"
+        android:textColor="@color/colorWhite"/>
 
     <TextView
         android:id="@+id/textViewRarity"
@@ -50,7 +52,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.01"
         app:layout_constraintStart_toEndOf="@+id/textView10"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView"
+        android:textColor="@color/colorWhite"/>
 
     <TextView
         android:id="@+id/textViewSet"
@@ -61,7 +64,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/textView11"
-        app:layout_constraintTop_toBottomOf="@+id/textViewRarity" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewRarity"
+        android:textColor="@color/colorWhite"/>
 
     <TextView
         android:id="@+id/textViewFaction"
@@ -72,7 +76,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/textView12"
-        app:layout_constraintTop_toBottomOf="@+id/textViewSet" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewSet"
+        android:textColor="@color/colorWhite"/>
 
     <ImageView
         android:id="@+id/imageView2"
@@ -94,7 +99,8 @@
         android:layout_marginTop="124dp"
         android:text="Rarity :"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView"
+        android:textColor="@color/colorWhite"/>
 
     <TextView
         android:id="@+id/textView11"
@@ -104,7 +110,8 @@
         android:layout_marginTop="8dp"
         android:text="Set :"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView10" />
+        app:layout_constraintTop_toBottomOf="@+id/textView10"
+        android:textColor="@color/colorWhite"/>
 
     <TextView
         android:id="@+id/textView12"
@@ -114,6 +121,7 @@
         android:layout_marginTop="8dp"
         android:text="Faction :"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView11" />
+        app:layout_constraintTop_toBottomOf="@+id/textView11"
+        android:textColor="@color/colorWhite"/>
 
 </android.support.constraint.ConstraintLayout>

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorWhite"
+    android:background="@drawable/fond2hs"
     tools:context="com.iut.e168076r.hearthstonecardlooker.MainActivity">
 
     <TextView
@@ -13,9 +13,12 @@
         android:layout_height="115dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="TextView"
+        android:text="Bienvenue sur Hearthstone Card Looker"
+        android:textAlignment="center"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:textSize="25dp"
+        android:textColor="@color/colorWhite" />
 
     <Spinner
         android:id="@+id/spinner"
@@ -24,7 +27,8 @@
         android:layout_marginTop="136dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:textColor="@color/colorWhite"/>
 
     <Spinner
         android:id="@+id/spinner2"
@@ -33,7 +37,8 @@
         android:layout_marginTop="40dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinner" />
+        app:layout_constraintTop_toBottomOf="@+id/spinner"
+        android:textColor="@color/colorWhite"/>
 
     <Spinner
         android:id="@+id/spinner3"
@@ -42,7 +47,8 @@
         android:layout_marginTop="40dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinner2" />
+        app:layout_constraintTop_toBottomOf="@+id/spinner2"
+        android:textColor="@color/colorWhite"/>
 
     <Spinner
         android:id="@+id/spinner4"
@@ -51,7 +57,8 @@
         android:layout_marginTop="40dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinner3" />
+        app:layout_constraintTop_toBottomOf="@+id/spinner3"
+        android:textColor="@color/colorWhite"/>
 
     <Spinner
         android:id="@+id/spinner5"
@@ -60,7 +67,8 @@
         android:layout_marginTop="40dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinner4" />
+        app:layout_constraintTop_toBottomOf="@+id/spinner4"
+        android:textColor="@color/colorWhite"/>
 
     <Spinner
         android:id="@+id/spinner6"
@@ -69,5 +77,6 @@
         android:layout_marginTop="40dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinner5" />
+        app:layout_constraintTop_toBottomOf="@+id/spinner5"
+        android:textColor="@color/colorWhite"/>
 </android.support.constraint.ConstraintLayout>

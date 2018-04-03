@@ -45,7 +45,7 @@ public class Main2Activity extends AppCompatActivity {
         search = getIntent().getExtras().getString("Search");
         type = getIntent().getExtras().getString("Type");
 
-        t = findViewById(R.id.textViewMain2);
+
         l = findViewById(R.id.listView);
 
         l.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -114,7 +114,7 @@ public class Main2Activity extends AppCompatActivity {
                                 map.put("name",cardname);
                                 list.add(map);
                             }
-                            t.setText(list.toString());
+
                             SimpleAdapter s = new SimpleAdapter(getApplicationContext(),list,R.layout.listview_layout,
                                     new String[] { "cardId","name" },
                                     new int[] {R.id.line_a, R.id.line_b} );

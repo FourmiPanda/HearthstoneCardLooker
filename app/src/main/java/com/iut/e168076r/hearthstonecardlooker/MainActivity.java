@@ -8,7 +8,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -34,7 +33,6 @@ import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
 
-    public TextView mTextView;
     public Spinner spinner,spinner2,spinner3,spinner4,spinner5;
     public boolean spinnerCheck,spinnerCheck2,spinnerCheck3,spinnerCheck4,spinnerCheck5,spinnerCheck6 = false;
 
@@ -42,7 +40,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        mTextView = findViewById(R.id.textViewMain);
 
         spinner = findViewById(R.id.spinner);
         spinner2 = findViewById(R.id.spinner2);
