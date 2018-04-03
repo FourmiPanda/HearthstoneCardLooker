@@ -1,9 +1,14 @@
 package com.iut.e168076r.hearthstonecardlooker;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,6 +30,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -32,6 +38,9 @@ public class Main3Activity extends AppCompatActivity {
 
     private TextView textViewName,textViewAHC,textViewRarity,textViewSet,textViewFaction;
     private ImageView cardImg,cardImgGold;
+    public String lang = "enUS";
+    public boolean spinnerCheckLang = false;
+    public String cardid = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,9 +55,18 @@ public class Main3Activity extends AppCompatActivity {
         cardImg = findViewById(R.id.imageView);
         cardImgGold = findViewById(R.id.imageView2);
 
-        String cardid = getIntent().getExtras().getString("cardId");
+        if ( getIntent().getExtras() != null){
+            if ( getIntent().getExtras().containsKey("Lang")){
+                lang = getIntent().getExtras().getString("Lang");
+            }
+        }
+
+
+        cardid = getIntent().getExtras().getString("cardId");
         Log.d("CARDID","=> "+cardid);
 
+
+        getAllLang();
         getCardIDInfo(cardid);
 
 
@@ -59,10 +77,107 @@ public class Main3Activity extends AppCompatActivity {
 
     }
 
+    public void getAllLang(){
+
+            RequestQueue queue = Volley.newRequestQueue(this);
+            String url = "https://omgvamp-hearthstone-v1.p.mashape.com/info";
+            StringRequest postRequest = new StringRequest(Request.Method.GET, url,
+                    new Response.Listener<String>()
+                    {
+                        @Override
+                        public void onResponse(String response) {
+                            Log.d("Response", response);
+
+                            try {
+                                JSONObject json_hearthstoneInfo = new JSONObject(response);
+
+                                JSONArray arrLocales = json_hearthstoneInfo.getJSONArray("locales");
+
+                                //SPINNER LOCALES
+                                ArrayList<String> list = new ArrayList<String>();
+                                for(int i = 0; i < arrLocales.length(); i++){
+                                    list.add(arrLocales.get(i).toString());
+                                }
+
+                                Spinner s = (Spinner) findViewById(R.id.spinnerLocales);
+                                ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(),
+                                        android.R.layout.simple_spinner_item, list);
+                                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                                s.setAdapter(adapter);
+
+                                s.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                                    @Override
+                                    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                                        if(spinnerCheckLang){
+                                            Toast.makeText(getApplicationContext(),"Clic",Toast.LENGTH_SHORT).show();
+                                            Intent intent = new Intent(getApplicationContext(),Main3Activity.class);
+                                            intent.putExtra("Lang",adapterView.getItemAtPosition(i).toString());
+                                            intent.putExtra("cardId",cardid);
+                                            startActivity(intent);
+                                        }
+                                        spinnerCheckLang = true;
+                                    }
+
+                                    @Override
+                                    public void onNothingSelected(AdapterView<?> adapterView) {
+
+                                    }
+                                });
+
+
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+
+                        }
+                    },
+                    new Response.ErrorListener()
+                    {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            if (error instanceof TimeoutError || error instanceof NoConnectionError) {
+                                Toast.makeText(getApplicationContext(),
+                                        "Une erreur de connexion est survenue",
+                                        Toast.LENGTH_LONG).show();
+                            } else if (error instanceof AuthFailureError) {
+                                Toast.makeText(getApplicationContext(),
+                                        "Une erreur d'authentification est survenue",
+                                        Toast.LENGTH_LONG).show();
+                            } else if (error instanceof ServerError) {
+                                Toast.makeText(getApplicationContext(),
+                                        "Une erreur serveur est survenue",
+                                        Toast.LENGTH_LONG).show();
+                            } else if (error instanceof NetworkError) {
+                                Toast.makeText(getApplicationContext(),
+                                        "Une erreur réseau est survenue",
+                                        Toast.LENGTH_LONG).show();
+                            } else if (error instanceof ParseError) {
+                                Toast.makeText(getApplicationContext(),
+                                        "Une erreur d'analyse est survenue",
+                                        Toast.LENGTH_LONG).show();
+                            }
+                            Log.d("ERROR","error => "+error.toString());
+                        }
+                    }
+            ) {
+                @Override
+                public Map<String, String> getHeaders() throws AuthFailureError {
+                    Map<String, String>  params = new HashMap<String, String>();
+                    params.put("X-Mashape-Key", Configuration.API_KEY);
+                    params.put("Accept", "application/json");
+
+                    return params;
+                }
+            };
+            queue.add(postRequest);
+
+
+    }
+
     public void getCardIDInfo(String cardid) {
         Toast.makeText(this, "Envoie de la requete", Toast.LENGTH_SHORT).show();
         RequestQueue queue = Volley.newRequestQueue(this);
-        String url = "https://omgvamp-hearthstone-v1.p.mashape.com/cards/"+cardid;
+        String url = "https://omgvamp-hearthstone-v1.p.mashape.com/cards/"+cardid+"?locale="+lang;
         StringRequest postRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>()
                 {

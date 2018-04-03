@@ -36,8 +36,6 @@ import java.util.Map;
 public class Main2Activity extends AppCompatActivity {
 
     private String search,type;
-    private String lang;
-    private TextView t;
     private ListView l;
 
     @Override
@@ -47,7 +45,6 @@ public class Main2Activity extends AppCompatActivity {
 
         search = getIntent().getExtras().getString("Search");
         type = getIntent().getExtras().getString("Type");
-        lang = getIntent().getExtras().getString("Lang");
 
 
         l = findViewById(R.id.listView);
@@ -125,7 +122,6 @@ public class Main2Activity extends AppCompatActivity {
                 break;
         }
         Log.d(">>DEBUG<<",url);
-        url += "?locale="+lang;
         StringRequest postRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>()
                 {
