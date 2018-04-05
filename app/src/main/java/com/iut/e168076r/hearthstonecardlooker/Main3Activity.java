@@ -1,6 +1,7 @@
 package com.iut.e168076r.hearthstonecardlooker;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -8,6 +9,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -25,7 +27,10 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.drawable.GlideDrawable;
+import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.GlideDrawableImageViewTarget;
+import com.bumptech.glide.request.target.Target;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
@@ -49,7 +54,11 @@ public class Main3Activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main3);
+        Typeface t = Typeface.createFromAsset(getAssets(),"fonts/Hearthstone.ttf");
+
+
         textViewName = findViewById(R.id.textViewName);
+        textViewName.setTypeface(t);
         textViewAHC = findViewById(R.id.textViewAHC);
         textViewRarity = findViewById(R.id.textViewRarity);
         textViewSet = findViewById(R.id.textViewSet);
@@ -69,6 +78,21 @@ public class Main3Activity extends AppCompatActivity {
 
         cardid = getIntent().getExtras().getString("cardId");
         Log.d("CARDID","=> "+cardid);
+
+
+
+
+        TextView t10 = findViewById(R.id.textView10);
+        TextView t11 = findViewById(R.id.textView11);
+        TextView t12 = findViewById(R.id.textView12);
+
+        t10.setTypeface(t);
+        t11.setTypeface(t);
+        t12.setTypeface(t);
+
+
+
+
 
 
         getAllLang();
@@ -256,9 +280,44 @@ public class Main3Activity extends AppCompatActivity {
                                 textViewSet.setText(cardSet);
                                 textViewFaction.setText(faction);
 
-                                Picasso.with(getApplicationContext()).load(imageUrl).into(cardImg);
 
-                                Glide.with(getApplicationContext()).load(imageUrlGold).into(imageViewTarget);
+
+                                ProgressBar p1 = findViewById(R.id.progressBar);
+                                ProgressBar p2 = findViewById(R.id.progressBar2);
+
+
+                                Glide.with(getApplicationContext()).load(imageUrl).listener(new RequestListener<String, GlideDrawable>() {
+                                    @Override
+                                    public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
+                                        ProgressBar p1 = findViewById(R.id.progressBar);
+                                        p1.setVisibility(View.GONE);
+                                        return false;
+                                    }
+
+                                    @Override
+                                    public boolean onResourceReady(GlideDrawable resource, String model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
+                                        ProgressBar p1 = findViewById(R.id.progressBar);
+                                        p1.setVisibility(View.GONE);
+                                        return false;
+                                    }
+                                }).into(cardImg);
+
+                                Glide.with(getApplicationContext()).load(imageUrlGold).listener(new RequestListener<String, GlideDrawable>() {
+                                    @Override
+                                    public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
+
+                                        ProgressBar p2 = findViewById(R.id.progressBar2);
+                                        p2.setVisibility(View.GONE);
+                                        return false;
+                                    }
+
+                                    @Override
+                                    public boolean onResourceReady(GlideDrawable resource, String model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
+                                        ProgressBar p2 = findViewById(R.id.progressBar2);
+                                        p2.setVisibility(View.GONE);
+                                        return false;
+                                    }
+                                }).into(imageViewTarget);
 
 
 
