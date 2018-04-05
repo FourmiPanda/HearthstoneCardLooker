@@ -114,7 +114,6 @@ public class Main3Activity extends AppCompatActivity {
                                     @Override
                                     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                                         if(spinnerCheckLang){
-                                            Toast.makeText(getApplicationContext(),"Clic",Toast.LENGTH_SHORT).show();
                                             Intent intent = new Intent(getApplicationContext(),Main3Activity.class);
                                             intent.putExtra("Lang",adapterView.getItemAtPosition(i).toString());
                                             intent.putExtra("cardId",cardid);
@@ -181,7 +180,6 @@ public class Main3Activity extends AppCompatActivity {
     }
 
     public void getCardIDInfo(String cardid) {
-        Toast.makeText(this, "Envoie de la requete", Toast.LENGTH_SHORT).show();
         RequestQueue queue = Volley.newRequestQueue(this);
         String url = "https://omgvamp-hearthstone-v1.p.mashape.com/cards/"+cardid+"?locale="+lang;
         StringRequest postRequest = new StringRequest(Request.Method.GET, url,
@@ -189,7 +187,6 @@ public class Main3Activity extends AppCompatActivity {
                 {
                     @Override
                     public void onResponse(String response) {
-                        Toast.makeText(getApplicationContext(), "Reponse recu", Toast.LENGTH_SHORT).show();
                         Log.d("Response", response);
                         JSONArray json_hearthstoneInfo = new JSONArray();
                         try {
@@ -198,7 +195,6 @@ public class Main3Activity extends AppCompatActivity {
                             e.printStackTrace();
                         }
                             if (json_hearthstoneInfo.length() > 0){
-                                Toast.makeText(getApplicationContext(), "Début traitement", Toast.LENGTH_SHORT).show();
                                 String name = null;
                                 try {
                                     name = json_hearthstoneInfo.getJSONObject(0).getString("name");
@@ -264,7 +260,6 @@ public class Main3Activity extends AppCompatActivity {
 
                                 Glide.with(getApplicationContext()).load(imageUrlGold).into(imageViewTarget);
 
-                                Toast.makeText(getApplicationContext(), "Fin traitement", Toast.LENGTH_SHORT).show();
 
 
                             }else{

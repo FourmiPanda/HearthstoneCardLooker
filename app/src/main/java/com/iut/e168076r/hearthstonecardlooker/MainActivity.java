@@ -95,7 +95,6 @@ public class MainActivity extends AppCompatActivity {
                                 @Override
                                 public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                                     if(spinnerCheck){
-                                    Toast.makeText(getApplicationContext(),"Clic",Toast.LENGTH_SHORT).show();
                                     Intent intent = new Intent(getApplicationContext(),Main2Activity.class);
                                     intent.putExtra("Type","Classes");
                                     intent.putExtra("Search",adapterView.getItemAtPosition(i).toString());
@@ -128,7 +127,6 @@ public class MainActivity extends AppCompatActivity {
                                 @Override
                                 public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                                     if(spinnerCheck2){
-                                    Toast.makeText(getApplicationContext(),"Clic",Toast.LENGTH_SHORT).show();
                                     Intent intent = new Intent(getApplicationContext(),Main2Activity.class);
                                     intent.putExtra("Type","Sets");
                                     intent.putExtra("Search",adapterView.getItemAtPosition(i).toString());
@@ -159,7 +157,6 @@ public class MainActivity extends AppCompatActivity {
                                 @Override
                                 public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                                     if(spinnerCheck3){
-                                    Toast.makeText(getApplicationContext(),"Clic",Toast.LENGTH_SHORT).show();
                                     Intent intent = new Intent(getApplicationContext(),Main2Activity.class);
                                     intent.putExtra("Type","Types");
                                     intent.putExtra("Search",adapterView.getItemAtPosition(i).toString());
@@ -190,7 +187,6 @@ public class MainActivity extends AppCompatActivity {
                                 @Override
                                 public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                                     if(spinnerCheck4){
-                                    Toast.makeText(getApplicationContext(),"Clic",Toast.LENGTH_SHORT).show();
                                     Intent intent = new Intent(getApplicationContext(),Main2Activity.class);
                                     intent.putExtra("Type","Factions");
                                     intent.putExtra("Search",adapterView.getItemAtPosition(i).toString());
@@ -221,7 +217,6 @@ public class MainActivity extends AppCompatActivity {
                                 @Override
                                 public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                                     if(spinnerCheck5){
-                                    Toast.makeText(getApplicationContext(),"Clic",Toast.LENGTH_SHORT).show();
                                     Intent intent = new Intent(getApplicationContext(),Main2Activity.class);
                                     intent.putExtra("Type","Qualities");
                                     intent.putExtra("Search",adapterView.getItemAtPosition(i).toString());
@@ -255,7 +250,6 @@ public class MainActivity extends AppCompatActivity {
                                 @Override
                                 public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                                     if(spinnerCheck6){
-                                    Toast.makeText(getApplicationContext(),"Clic",Toast.LENGTH_SHORT).show();
                                     Intent intent = new Intent(getApplicationContext(),Main2Activity.class);
                                     intent.putExtra("Type","Races");
                                     intent.putExtra("Search",adapterView.getItemAtPosition(i).toString());

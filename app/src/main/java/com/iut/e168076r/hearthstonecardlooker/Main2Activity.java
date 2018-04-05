@@ -6,10 +6,13 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
+import android.widget.SeekBar;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.SeekBar.OnSeekBarChangeListener;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.NetworkError;
@@ -27,16 +30,17 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONArray;
 import org.json.JSONException;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 public class Main2Activity extends AppCompatActivity {
 
-    private String search,type;
+    private String search, type;
+    private TextView t;
     private ListView l;
+    private ArrayList<HashMap<String,String>> list = new ArrayList<HashMap<String,String>>();
+    private int NOMBRE_ITEM_PAGE = 10, nPage = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +50,7 @@ public class Main2Activity extends AppCompatActivity {
         search = getIntent().getExtras().getString("Search");
         type = getIntent().getExtras().getString("Type");
 
-
+        t = findViewById(R.id.textView);
         l = findViewById(R.id.listView);
 
         l.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -58,10 +62,38 @@ public class Main2Activity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
         getHearthstoneSearch();
-
-
+        final Button precedant = (Button) findViewById(R.id.precedant);
+        precedant.setEnabled(false);
+        final Button suivant = (Button) findViewById(R.id.suivant);
+        precedant.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                nPage--;
+                loadList(nPage);
+                if(nPage <= 1){
+                    precedant.setEnabled(false);
+                }
+                if(! (nPage * NOMBRE_ITEM_PAGE >= list.size())){
+                    suivant.setEnabled(true);
+                }
+                t.setText("Page " + nPage);
+            }
+        });
+        suivant.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                nPage++;
+                loadList(nPage);
+                if(nPage * NOMBRE_ITEM_PAGE >= list.size()){
+                    suivant.setEnabled(false);
+                }
+                if(nPage > 1){
+                    precedant.setEnabled(true);
+                }
+                t.setText("Page " + nPage);
+            }
+        });
     }
 
 
@@ -70,58 +102,27 @@ public class Main2Activity extends AppCompatActivity {
         String url = "";
         switch(type){
             case "Classes":
-                try {
-                    String query = URLEncoder.encode(search, "utf-8").replace("+", "%20");
-                    url = "https://omgvamp-hearthstone-v1.p.mashape.com/cards/classes/"+query;
-                } catch (UnsupportedEncodingException e) {
-                    e.printStackTrace();
-                }
-
+                url = "https://omgvamp-hearthstone-v1.p.mashape.com/cards/classes/"+search;
                 break;
             case "Sets":
-                try {
-                    String query = URLEncoder.encode(search, "utf-8").replace("+", "%20");
-                    url = "https://omgvamp-hearthstone-v1.p.mashape.com/cards/sets/"+query;
-                } catch (UnsupportedEncodingException e) {
-                    e.printStackTrace();
-                }
+                url = "https://omgvamp-hearthstone-v1.p.mashape.com/cards/sets/"+search;
                 break;
             case "Types":
-                try {
-                    String query = URLEncoder.encode(search, "utf-8").replace("+", "%20");
-                    url = "https://omgvamp-hearthstone-v1.p.mashape.com/cards/types/"+query;
-                } catch (UnsupportedEncodingException e) {
-                    e.printStackTrace();
-                }
+                url = "https://omgvamp-hearthstone-v1.p.mashape.com/cards/types/"+search;
                 break;
             case "Factions":
-                try {
-                    String query = URLEncoder.encode(search, "utf-8").replace("+", "%20");
-                    url = "https://omgvamp-hearthstone-v1.p.mashape.com/cards/factions/"+query;
-                } catch (UnsupportedEncodingException e) {
-                    e.printStackTrace();
-                }
+                url = "https://omgvamp-hearthstone-v1.p.mashape.com/cards/factions/"+search;
                 break;
             case "Qualities":
-                try {
-                    String query = URLEncoder.encode(search, "utf-8").replace("+", "%20");
-                    url = "https://omgvamp-hearthstone-v1.p.mashape.com/cards/qualities/"+query;
-                } catch (UnsupportedEncodingException e) {
-                    e.printStackTrace();
-                }
+                url = "https://omgvamp-hearthstone-v1.p.mashape.com/cards/qualities/"+search;
                 break;
             case "Races":
-                try {
-                    String query = URLEncoder.encode(search, "utf-8").replace("+", "%20");
-                    url = "https://omgvamp-hearthstone-v1.p.mashape.com/cards/races/"+query;
-                } catch (UnsupportedEncodingException e) {
-                    e.printStackTrace();
-                }
+                url = "https://omgvamp-hearthstone-v1.p.mashape.com/cards/races/"+search;
                 break;
             default:
                 break;
         }
-        Log.d(">>DEBUG<<",url);
+
         StringRequest postRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>()
                 {
@@ -135,8 +136,6 @@ public class Main2Activity extends AppCompatActivity {
                             String cardid = "";
                             String cardname = "";
                             HashMap<String,String> map = new HashMap<String,String>();
-                            ArrayList<HashMap<String,String>> list = new ArrayList<HashMap<String,String>>();;
-
                             for(int i = 0; i < json_hearthstoneSearch.length(); i++){
                                 map = new HashMap<String,String>();
 
@@ -147,15 +146,11 @@ public class Main2Activity extends AppCompatActivity {
                                 list.add(map);
                             }
 
-                            SimpleAdapter s = new SimpleAdapter(getApplicationContext(),list,R.layout.listview_layout,
-                                    new String[] { "cardId","name" },
-                                    new int[] {R.id.line_a, R.id.line_b} );
-                            l.setAdapter(s);
-
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
-
+                        loadList(1);
+                        t.setText("Page 1");
                     }
                 },
                 new Response.ErrorListener()
@@ -198,5 +193,22 @@ public class Main2Activity extends AppCompatActivity {
         };
         queue.add(postRequest);
 
+    }
+
+    private void loadList(int number)
+    {
+        ArrayList<HashMap<String,String>> listLimite = new ArrayList<HashMap<String,String>>();
+        int start = (number - 1) * NOMBRE_ITEM_PAGE;
+        for(int i=start;i<(start)+NOMBRE_ITEM_PAGE;i++){
+            if(i<list.size()){
+                listLimite.add(list.get(i));
+            }else{
+                break;
+            }
+        }
+        SimpleAdapter s = new SimpleAdapter(getApplicationContext(),listLimite,R.layout.listview_layout,
+                new String[] { "cardId","name" },
+                new int[] {R.id.line_a, R.id.line_b} );
+        l.setAdapter(s);
     }
 }

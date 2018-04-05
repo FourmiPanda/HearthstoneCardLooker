@@ -7,10 +7,24 @@
     android:background="@drawable/fond2hs"
     tools:context="com.iut.e168076r.hearthstonecardlooker.Main2Activity">
 
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="118dp"
+        android:layout_height="32dp"
+        android:text=""
+        android:layout_marginRight="8dp"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginLeft="8dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginBottom="8dp"
+        android:textAlignment="center"
+        android:textSize="50px"
+        app:layout_constraintBottom_toTopOf="@+id/listView" />
+
     <ListView
         android:id="@+id/listView"
-        android:layout_width="380dp"
-        android:layout_height="543dp"
+        android:layout_width="356dp"
+        android:layout_height="423dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -19,5 +33,28 @@
         android:layout_marginTop="8dp"
         android:layout_marginBottom="1dp"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent" />
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintVertical_bias="0.474"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp" />
+
+    <Button
+        android:id="@+id/precedant"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Page précédante"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/listView"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <Button
+        android:id="@+id/suivant"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Page suivante"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/listView" />
+
+
 </android.support.constraint.ConstraintLayout>
