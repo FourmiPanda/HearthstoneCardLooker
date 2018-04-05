@@ -1,3 +1,9 @@
 <resources>
-    <string name="app_name">HearthstoneCardLooker</string>
+    <string name="app_name">Hearthstone Card Looker</string>
+    <string name="choix0">Classes</string>
+    <string name="choix1">Sets</string>
+    <string name="choix2">Types</string>
+    <string name="choix3">Factions</string>
+    <string name="choix4">Qualities</string>
+    <string name="choix5">Race</string>
 </resources>

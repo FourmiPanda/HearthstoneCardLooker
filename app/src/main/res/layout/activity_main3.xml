@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/fond2hs"
+    android:background="@drawable/wall1080"
     tools:context="com.iut.e168076r.hearthstonecardlooker.Main3Activity">
 
     <ImageView

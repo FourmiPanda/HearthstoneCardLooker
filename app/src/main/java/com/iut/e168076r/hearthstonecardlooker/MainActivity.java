@@ -1,6 +1,7 @@
 package com.iut.e168076r.hearthstonecardlooker;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -8,6 +9,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -47,6 +49,30 @@ public class MainActivity extends AppCompatActivity {
         spinner4 = findViewById(R.id.spinner4);
         spinner5 = findViewById(R.id.spinner5);
 
+        Typeface t = Typeface.createFromAsset(getAssets(),"fonts/Hearthstone.ttf");
+
+        TextView t2 = findViewById(R.id.textView2);
+        t2.setText(getResources().getString(R.string.choix0));
+        t2.setTypeface(t);
+        TextView t3 = findViewById(R.id.textView3);
+        t3.setText(getResources().getString(R.string.choix1));
+        t3.setTypeface(t);
+        TextView t4 = findViewById(R.id.textView4);
+        t4.setText(getResources().getString(R.string.choix2));
+        t4.setTypeface(t);
+        TextView t5 = findViewById(R.id.textView5);
+        t5.setText(getResources().getString(R.string.choix3));
+        t5.setTypeface(t);
+        TextView t6 = findViewById(R.id.textView6);
+        t6.setText(getResources().getString(R.string.choix4));
+        t6.setTypeface(t);
+        TextView t7 = findViewById(R.id.textView7);
+        t7.setText(getResources().getString(R.string.choix5));
+
+        t7.setTypeface(t);
+
+
+
 
         getHearthstoneInfo();
 
@@ -81,6 +107,7 @@ public class MainActivity extends AppCompatActivity {
 
                             //SPINNER CLASSES
                             ArrayList<String> list = new ArrayList<String>();
+                            list.add("--");
                             for(int i = 0; i < arrClasses.length(); i++){
                                 list.add(arrClasses.get(i).toString());
                             }
@@ -113,6 +140,7 @@ public class MainActivity extends AppCompatActivity {
 
                             //SPINNER SETS
                             list = new ArrayList<String>();
+                            list.add("--");
                             for(int i = 0; i < arrSets.length(); i++){
                                 list.add(arrSets.get(i).toString());
                             }
@@ -143,6 +171,7 @@ public class MainActivity extends AppCompatActivity {
 
                             //SPINNER TYPES
                             list = new ArrayList<String>();
+                            list.add("--");
                             for(int i = 0; i < arrTypes.length(); i++){
                                 list.add(arrTypes.get(i).toString());
                             }
@@ -173,6 +202,7 @@ public class MainActivity extends AppCompatActivity {
 
                             //SPINNER FACTIONS
                             list = new ArrayList<String>();
+                            list.add("--");
                             for(int i = 0; i < arrFactions.length(); i++){
                                 list.add(arrFactions.get(i).toString());
                             }
@@ -202,7 +232,9 @@ public class MainActivity extends AppCompatActivity {
                             });
 
                             //SPINNER QUALITIES
+
                             list = new ArrayList<String>();
+                            list.add("--");
                             for(int i = 0; i < arrQualities.length(); i++){
                                 list.add(arrQualities.get(i).toString());
                             }
@@ -236,6 +268,7 @@ public class MainActivity extends AppCompatActivity {
 
                             //SPINNER RACES
                             list = new ArrayList<String>();
+                            list.add("--");
                             for(int i = 0; i < arrRaces.length(); i++){
                                 list.add(arrRaces.get(i).toString());
                             }
